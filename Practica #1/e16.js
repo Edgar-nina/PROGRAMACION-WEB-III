@@ -1,19 +1,17 @@
-function paso1() {
-    return new Promise(resolve => setTimeout(() => resolve("Paso 1 completado"), 1000));
+function p1() {
+    return new Promise(r => setTimeout(() => r("P1 listo"), 1000));
 }
 
-function paso2() {
-    return new Promise(resolve => setTimeout(() => resolve("Paso 2 completado"), 1000));
+function p2() {
+    return new Promise(r => setTimeout(() => r("P2 listo"), 1000));
 }
-
-async function ejecutar() {
-    const r1 = await paso1();
+async function run() {
+    let r1 = await p1();
     console.log(r1);
 
-    const r2 = await paso2();
+    let r2 = await p2();
     console.log(r2);
 
-    console.log("Todos los pasos completados");
+    console.log("Todo listo");
 }
-
-ejecutar();
+run();
