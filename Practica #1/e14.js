@@ -1,33 +1,28 @@
-// Función que devuelve una promesa simulando una consulta a base de datos
-function consultarUsuario(id) {
-    return new Promise((resolve, reject) => {
+function buscar(id) {
+    return new Promise((res, rej) => {
         setTimeout(() => {
             if (id > 0) {
-                resolve({ id: id, nombre: "Juan" });
+                res({ id: id, nom: "Juan" });
             } else {
-                reject("ID inválido");
+                rej("ID inválido");
             }
         }, 1000);
     });
 }
-
-// Función que convierte la promesa en callback
-function consultarUsuarioCallback(id, callback) {
+function buscarCb(id, cb) {
     (async () => {
         try {
-            const usuario = await consultarUsuario(id);
-            callback(null, usuario); // todo bien
-        } catch (error) {
-            callback(error, null);   // ocurrió un error
+            const usr = await buscar(id);
+            cb(null, usr);
+        } catch (err) {
+            cb(err, null); 
         }
     })();
 }
-
-// Uso con callback
-consultarUsuarioCallback(1, (err, usuario) => {
+buscarCb(1, (err, res) => {
     if (err) {
         console.error("Error:", err);
     } else {
-        console.log("Usuario:", usuario);
+        console.log("Usuario:", res);
     }
 });
